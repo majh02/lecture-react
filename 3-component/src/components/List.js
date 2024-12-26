@@ -1,6 +1,5 @@
 import React from "react";
 import { formatRelativeDate } from "../helpers.js";
-import { Button } from '@mui/material/Button';
 
 const List = ({
   data = [],

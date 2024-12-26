@@ -1,2 +1,5 @@
-node_modules
+3-component/package.json
+3-component/package-lock.json
+3-component/webpack.config.js
 dist
+3-component/node_modules

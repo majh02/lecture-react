@@ -8,7 +8,11 @@ module.exports = {
   },
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./",
+    static: {
+      directory: path.resolve(__dirname, "./"), // contentBase 대신 static 사용
+    },
+    port: 8080, // 원하는 포트를 지정
+    open: true, // 개발 서버 시작 시 브라우저 열기
   },
   module: {
     rules: [

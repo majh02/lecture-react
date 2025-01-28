@@ -23,6 +23,14 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.css$/i, // CSS 파일 처리
+        use: [
+          "style-loader", // CSS를 DOM에 삽입
+          "css-loader",   // CSS 파일을 JS로 로드
+          "postcss-loader", // PostCSS 처리
+        ],
+      },
     ],
   },
   plugins: [new CleanWebpackPlugin()],

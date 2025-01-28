@@ -6,6 +6,7 @@ import SearchForm from "./components/SearchForm.js";
 import SearchResult from "./components/SearchResult.js";
 import Tabs, { TabType } from "./components/Tabs.js";
 import store from "./Store.js";
+import { ErrorBoundary } from "@sentry/react";
 
 export default class App extends React.Component {
   constructor() {
@@ -48,7 +49,19 @@ export default class App extends React.Component {
     const { searchKeyword, searchResult, submitted, selectedTab } = this.state;
 
     return (
-      <>
+      <ErrorBoundary
+        fallback={({ error }) => (
+          <div className="error-boundary">
+              <p>에러가 발생했습니다.</p>
+              <p>{error.toString()}</p>
+          </div>
+        )}
+        beforeCapture={(scope) => {
+          scope.setTag("searchKeyword", searchKeyword);
+          scope.setTag("selectedTab", selectedTab);
+          scope.setLevel("warning");
+        }}
+      >
         <Header title="검색" />
         <div className="container">
           <SearchForm
@@ -76,7 +89,7 @@ export default class App extends React.Component {
             )}
           </div>
         </div>
-      </>
+      </ErrorBoundary>
     );
   }
 }
